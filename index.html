@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>CompileFlow — Visual Compiler Simulator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <div class="logo-icon">CF</div><span>CompileFlow</span>
+        </div>
+        <div class="header-meta">
+            <div class="status-dot" id="statusDot"></div>
+            <span id="statusText">Ready</span>
+            <span style="color:var(--border2)">|</span>
+            <span id="phaseCount">0 / 6 phases</span>
+            <span style="color:var(--border2)">|</span>
+            <span>v2.1.0</span>
+            <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">☽ Dark Mode</button>
+        </div>
+    </header>
+
+    <div class="app">
+        <div class="left-panel">
+            <div class="editor-section">
+                <div class="panel-label">Source Program</div>
+                <textarea id="sourceCode" class="code-editor" spellcheck="false"
+                    placeholder="Write your source code here...">int main() {
+  int x = 10;
+  int y = 20;
+  int z = x + y;
+  if (z > 15) {
+    int result = z * 2;
+    return result;
+  }
+  return 0;
+}</textarea>
+            </div>
+
+            <div class="samples-section">
+                <div class="panel-label">Sample Programs</div>
+                <div class="samples-grid">
+                    <button class="sample-btn" onclick="loadSample('basic')">▶ Basic Arithmetic</button>
+                    <button class="sample-btn" onclick="loadSample('loop')">▶ For Loop</button>
+                    <button class="sample-btn" onclick="loadSample('function')">▶ Functions</button>
+                    <button class="sample-btn" onclick="loadSample('error')">▶ Semantic Errors</button>
+                </div>
+            </div>
+
+            <div class="controls-section">
+                <button class="btn-run" id="btnRun" onclick="runAll()">Run Full Compilation</button>
+                <div class="btn-row">
+                    <button class="btn-small btn-step" id="btnStep" onclick="runStep()">⏭ Step Forward</button>
+                    <button class="btn-small btn-reset" onclick="resetAll()">↺ Reset</button>
+                </div>
+            </div>
+
+            <div class="phases-section">
+                <div class="panel-label">Compilation Phases</div>
+                <div id="phaseList">
+                    <div class="phase-item" id="ph0">
+                        <div class="phase-num">1</div>
+                        <div class="phase-info">
+                            <div class="phase-name">Lexical Analysis</div>
+                        </div><span class="phase-badge badge-pending" id="badge0">—</span>
+                    </div>
+                    <div class="phase-item" id="ph1">
+                        <div class="phase-num">2</div>
+                        <div class="phase-info">
+                            <div class="phase-name">Syntax Analysis</div>
+                        </div><span class="phase-badge badge-pending" id="badge1">—</span>
+                    </div>
+                    <div class="phase-item" id="ph2">
+                        <div class="phase-num">3</div>
+                        <div class="phase-info">
+                            <div class="phase-name">Semantic Analysis</div>
+                        </div><span class="phase-badge badge-pending" id="badge2">—</span>
+                    </div>
+                    <div class="phase-item" id="ph3">
+                        <div class="phase-num">4</div>
+                        <div class="phase-info">
+                            <div class="phase-name">IR Generation</div>
+                        </div><span class="phase-badge badge-pending" id="badge3">—</span>
+                    </div>
+                    <div class="phase-item" id="ph4">
+                        <div class="phase-num">5</div>
+                        <div class="phase-info">
+                            <div class="phase-name">Optimization</div>
+                        </div><span class="phase-badge badge-pending" id="badge4">—</span>
+                    </div>
+                    <div class="phase-item" id="ph5">
+                        <div class="phase-num">6</div>
+                        <div class="phase-info">
+                            <div class="phase-name">Code Generation</div>
+                        </div><span class="phase-badge badge-pending" id="badge5">—</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="right-panel">
+            <div class="pipeline-bar">
+                <div class="pipe-stage">
+                    <div class="pipe-box" id="pipe0">LEXER</div>
+                    <div class="pipe-arrow" id="arr0">→</div>
+                </div>
+                <div class="pipe-stage">
+                    <div class="pipe-box" id="pipe1">PARSER</div>
+                    <div class="pipe-arrow" id="arr1">→</div>
+                </div>
+                <div class="pipe-stage">
+                    <div class="pipe-box" id="pipe2">SEMANTIC</div>
+                    <div class="pipe-arrow" id="arr2">→</div>
+                </div>
+                <div class="pipe-stage">
+                    <div class="pipe-box" id="pipe3">IR GEN</div>
+                    <div class="pipe-arrow" id="arr3">→</div>
+                </div>
+                <div class="pipe-stage">
+                    <div class="pipe-box" id="pipe4">OPTIMIZER</div>
+                    <div class="pipe-arrow" id="arr4">→</div>
+                </div>
+                <div class="pipe-stage">
+                    <div class="pipe-box" id="pipe5">CODEGEN</div>
+                </div>
+                <div style="margin-left:auto;padding-left:12px;"><span id="pipeTime"
+                        style="font-size:11px;color:var(--text3)"></span></div>
+            </div>
+
+            <div class="output-area">
+                <div class="tab-bar">
+                    <div class="tab active" onclick="switchTab(0)">Tokens <span class="tab-count" id="tc0">0</span>
+                    </div>
+                    <div class="tab" onclick="switchTab(1)">Parse Tree <span class="tab-count" id="tc1">0</span></div>
+                    <div class="tab" onclick="switchTab(2)">Semantics <span class="tab-count" id="tc2">0</span></div>
+                    <div class="tab" onclick="switchTab(3)">IR Code <span class="tab-count" id="tc3">0</span></div>
+                    <div class="tab" onclick="switchTab(4)">Optimized <span class="tab-count" id="tc4">0</span></div>
+                    <div class="tab" onclick="switchTab(5)">Assembly <span class="tab-count" id="tc5">0</span></div>
+                    <div class="tab" onclick="switchTab(6)">Summary <span class="tab-count" id="tc6">—</span></div>
+                </div>
+
+                <div class="tab-content active" id="content0">
+                    <div class="empty-state" id="empty0">
+                        <h3>No Tokens Yet</h3>
+                        <p>Run the compiler to see lexical analysis output.</p>
+                    </div>
+                    <div id="tokenOutput" style="display:none;padding:14px 20px;">
+                        <div id="tokenStats" class="stats-bar"></div>
+                        <table class="token-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Token</th>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Col</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tokenBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="content1">
+                    <div class="empty-state" id="empty1">
+                        <h3>No Parse Tree</h3>
+                        <p>Run syntax analysis to see the AST.</p>
+                    </div>
+                    <div id="parseOutput" style="display:none;padding:14px 20px;">
+                        <div id="treeBody" class="tree-container"></div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="content2">
+                    <div class="empty-state" id="empty2">
+                        <h3>No Semantic Analysis</h3>
+                        <p>Run semantic checks to see type and scope analysis.</p>
+                    </div>
+                    <div id="semanticOutput" style="display:none;padding:14px 20px;"></div>
+                </div>
+
+                <div class="tab-content" id="content3">
+                    <div class="empty-state" id="empty3">
+                        <h3>No IR Generated</h3>
+                        <p>Run IR generation to see three-address code.</p>
+                    </div>
+                    <div id="irOutput" style="display:none;padding:14px 20px;"></div>
+                </div>
+
+                <div class="tab-content" id="content4">
+                    <div class="empty-state" id="empty4">
+                        <h3>No Optimizations</h3>
+                        <p>Run optimizer to see applied optimizations.</p>
+                    </div>
+                    <div id="optOutput" style="display:none;padding:14px 20px;"></div>
+                </div>
+
+                <div class="tab-content" id="content5">
+                    <div class="empty-state" id="empty5">
+                        <h3>No Assembly Generated</h3>
+                        <p>Run code generation to see pseudo-assembly output.</p>
+                    </div>
+                    <div id="asmOutput" style="display:none;padding:14px 20px;"></div>
+                </div>
+
+                <div class="tab-content" id="content6">
+                    <div class="empty-state" id="empty6">
+                        <h3>No Summary</h3>
+                        <p>Complete the compilation to see a full report.</p>
+                    </div>
+                    <div id="summaryOutput" style="display:none;padding:20px;"></div>
+                </div>
+            </div>
+
+            <div class="error-log" id="errorLog" style="display:none;">
+                <div class="error-log-header">⚠ Compilation Log <span id="errCount" style="margin-left:8px"></span>
+                </div>
+                <div id="errorLogBody"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="notif" id="notif"></div>
+    <script src="script.js"></script>
+</body>
+
+</html>
