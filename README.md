@@ -24,11 +24,31 @@ Visualize the complete compiler pipeline from lexical analysis to assembly code 
 
 ---
 
+# 📚 Table of Contents
+
+- About
+- Features
+- Technologies Used
+- Project Structure
+- Compiler Pipeline
+- Screenshots
+- Getting Started
+- Learning Objectives
+- Skills Demonstrated
+- Future Improvements
+- Contributing
+- License
+- Author
+
+---
+
 # 📖 About
 
-CompileFlow is a modern **Compiler Construction Simulator** developed using **HTML, CSS, and JavaScript**. It enables students, educators, and developers to understand how a compiler transforms source code into executable instructions through an interactive visual workflow.
+CompileFlow is a modern **Compiler Construction Simulator** built using **HTML, CSS, and JavaScript**. It enables students, educators, and developers to visualize how a compiler transforms source code into executable instructions.
 
-Instead of simply displaying compiler theory, CompileFlow demonstrates each compilation stage with real-time outputs, making compiler concepts easier to understand and learn.
+Instead of simply presenting compiler theory, CompileFlow demonstrates every compiler phase through an interactive graphical interface, allowing users to inspect the output generated at each stage of the compilation process.
+
+Whether you're learning **Compiler Construction**, **Programming Languages**, or **System Software**, CompileFlow provides an engaging and practical learning experience.
 
 ---
 
@@ -41,23 +61,21 @@ Instead of simply displaying compiler theory, CompileFlow demonstrates each comp
 | ✅ Semantic Analysis | Checks variables, scope, and data types |
 | ⚡ Intermediate Representation | Generates Three Address Code (TAC) |
 | 🚀 Code Optimization | Demonstrates optimization techniques |
-| 🖥 Assembly Generation | Produces simplified assembly instructions |
-| 📊 Compilation Statistics | Displays execution metrics |
-| 📋 Compilation Summary | Complete overview of all compilation phases |
-| ▶ Step-by-Step Mode | Execute compiler phases individually |
-| ⚡ Full Compilation | Run the entire compiler pipeline |
-| 📚 Sample Programs | Built-in examples for quick testing |
-| 📱 Responsive Design | Works across desktop and mobile devices |
+| 🖥 Assembly Generation | Produces pseudo assembly instructions |
+| 📊 Compilation Statistics | Displays compilation metrics |
+| 📋 Compilation Summary | Overview of every compilation phase |
+| ▶ Step-by-Step Compilation | Execute one compiler phase at a time |
+| ⚡ Full Compilation | Execute the entire compiler pipeline |
+| 📚 Built-in Sample Programs | Test using ready-made examples |
+| 📱 Responsive Interface | Works on desktop and mobile devices |
 
 ---
 
 # 🛠 Technologies Used
 
-| Technology | Purpose |
-|------------|---------|
-| HTML5 | Structure |
-| CSS3 | Styling & Responsive UI |
-| JavaScript (ES6) | Compiler Logic & Interactivity |
+- HTML5
+- CSS3
+- JavaScript (ES6)
 
 ---
 
@@ -88,26 +106,26 @@ CompileFlow
 
 # ⚙ Compiler Pipeline
 
-## 1️⃣ Lexical Analysis
+### 1️⃣ Lexical Analysis
 
 - Token Generation
-- Keyword Detection
-- Identifier Recognition
+- Keyword Recognition
+- Identifier Detection
 - Operators
 - Delimiters
 - Literals
 
 ---
 
-## 2️⃣ Syntax Analysis
+### 2️⃣ Syntax Analysis
 
-- Parser
+- Parsing
 - Parse Tree Generation
 - Grammar Validation
 
 ---
 
-## 3️⃣ Semantic Analysis
+### 3️⃣ Semantic Analysis
 
 - Variable Declaration Checking
 - Type Checking
@@ -116,14 +134,14 @@ CompileFlow
 
 ---
 
-## 4️⃣ Intermediate Representation
+### 4️⃣ Intermediate Representation (IR)
 
-- Three Address Code (TAC)
-- Intermediate Code Generation
+- Three Address Code Generation
+- Intermediate Code Representation
 
 ---
 
-## 5️⃣ Code Optimization
+### 5️⃣ Code Optimization
 
 - Constant Folding
 - Dead Code Elimination
@@ -131,20 +149,20 @@ CompileFlow
 
 ---
 
-## 6️⃣ Assembly Code Generation
+### 6️⃣ Assembly Code Generation
 
 - Assembly Instruction Generation
 - Register Allocation
-- Final Executable Representation
+- Executable Representation
 
 ---
 
-## 7️⃣ Compilation Summary
+### 7️⃣ Compilation Summary
 
-- Total Tokens
+- Token Count
 - Parse Status
 - Semantic Status
-- Generated IR
+- IR Generation
 - Optimized Code
 - Assembly Output
 - Compilation Time
@@ -177,7 +195,7 @@ CompileFlow
 
 ---
 
-## ⚡ Intermediate Representation
+## ⚡ Intermediate Representation (IR)
 
 ![IR](images/ir-generation.png)
 
@@ -189,7 +207,7 @@ CompileFlow
 
 ---
 
-## 🖥 Assembly Generation
+## 🖥 Assembly Code Generation
 
 ![Assembly](images/assembly.png)
 
@@ -203,43 +221,56 @@ CompileFlow
 
 # 🚀 Getting Started
 
-## Clone Repository
+### Clone Repository
 
 ```bash
 git clone https://github.com/TahiraChohan/CompileFlow.git
 ```
 
-## Navigate
+### Navigate to the Project
 
 ```bash
 cd CompileFlow
 ```
 
-## Run
+### Run the Application
 
-Simply open:
+Simply open
 
 ```text
 index.html
 ```
 
-in your preferred browser.
+using your preferred web browser.
 
 ---
 
-# 🎓 Learning Objectives
+# 🎯 Learning Objectives
 
-CompileFlow demonstrates important compiler concepts including:
+CompileFlow demonstrates:
 
 - Compiler Construction
 - Lexical Analysis
 - Syntax Parsing
 - Semantic Analysis
 - Intermediate Code Generation
-- Three Address Code
+- Three Address Code (TAC)
 - Code Optimization
 - Assembly Generation
 - Programming Language Processing
+
+---
+
+# 🎓 Skills Demonstrated
+
+- Compiler Design
+- Parsing Algorithms
+- JavaScript Programming
+- DOM Manipulation
+- Responsive Web Design
+- UI/UX Design
+- Software Engineering
+- Educational Tool Development
 
 ---
 
@@ -249,12 +280,11 @@ CompileFlow demonstrates important compiler concepts including:
 - Control Flow Graph (CFG)
 - Data Flow Analysis
 - Register Allocation Visualization
-- Optimization Levels
-- Multi-Language Support
+- Multiple Optimization Levels
+- Multi-language Support
 - Dark Mode
-- Export Compilation Report (PDF)
+- Export Compilation Reports
 - Download Assembly Output
-- Syntax Highlighting
 - Error Highlighting
 - Symbol Table Visualization
 
@@ -262,14 +292,13 @@ CompileFlow demonstrates important compiler concepts including:
 
 # 🤝 Contributing
 
-Contributions are welcome!
+Contributions are always welcome.
 
-1. Fork the repository
-
-2. Create a feature branch
+1. Fork this repository
+2. Create your feature branch
 
 ```bash
-git checkout -b feature/NewFeature
+git checkout -b feature/YourFeature
 ```
 
 3. Commit your changes
@@ -278,10 +307,10 @@ git checkout -b feature/NewFeature
 git commit -m "Add new feature"
 ```
 
-4. Push the branch
+4. Push your branch
 
 ```bash
-git push origin feature/NewFeature
+git push origin feature/YourFeature
 ```
 
 5. Open a Pull Request
@@ -298,29 +327,28 @@ This project is licensed under the **MIT License**.
 
 ### Tahira Chohan
 
-Computer Science Student
+**Computer Science Student**
 
 GitHub:
 https://github.com/TahiraChohan
 
 ---
 
-# ⭐ Show Your Support
+# 🌟 Support
 
-If you found this project helpful,
+If you found this project useful,
 
-⭐ Star this repository
+⭐ Star the repository
 
-🍴 Fork it
+🍴 Fork the repository
 
-📢 Share it with others
+💬 Share it with your friends
 
-Your support helps the project grow!
+Your support motivates future improvements.
 
 ---
 
 <p align="center">
-
 <b>🚀 Compile • Analyze • Optimize • Generate</b>
 
 <br><br>
